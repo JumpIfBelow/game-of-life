@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The game of the life the return definitive anniversary limited edition III</title>
+
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <div>
+        <form action="">
+            <input type="number" min="1" name="xSize" placeholder="Nombre de cases X">
+            <input type="number" min="1" name="ySize" placeholder="Nombre de cases Y">
+        </form>
+    </div>
+    <div id="gameBoard">
+
+    </div>
+    <button name="nextStep">
+        Étape suivante
+    </button>
+    <input type="checkbox" name="auto">
+    <p>
+        Vitesse du mode auto :
+    </p>
+    <input type="number" name="interval"> ms
+    <button>
+        Générer aléatoirement
+    </button>
+
+    <script src="public/js/gameBoard.js"></script>
+    <script src="public/js/nextStep.js"></script>
+</body>
+</html>
