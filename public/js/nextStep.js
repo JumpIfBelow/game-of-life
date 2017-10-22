@@ -31,7 +31,7 @@ const drawNextStep = function () {
 
             // copy all of neighbour cells
             for (let i = -1; i <= 1; i++) {
-                if (typeof grid[x + i] == "undefined") {
+                if (grid[x + i] == undefined) {
                     continue;
                 }
 
@@ -57,9 +57,7 @@ const drawNextStep = function () {
                     numberOfAlive++;
 
                     // if there are more cells than required, the newCell is dead
-                    if (isAlive && numberOfAlive > 2) {
-                        break;
-                    } else if (!isAlive && numberOfAlive > 3) {
+                    if (!isAlive && numberOfAlive > 3) {
                         break;
                     }
                 }
@@ -67,7 +65,7 @@ const drawNextStep = function () {
 
             // set the right class
             if (isAlive) {
-                if (numberOfAlive != 2) {
+                if (numberOfAlive < 2 || numberOfAlive > 3) {
                     newClassList.remove("alive");
                     newClassList.add("dead");
                 }
