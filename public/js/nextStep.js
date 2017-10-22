@@ -3,40 +3,25 @@
  */
 const drawNextStep = function () {
     // go through all cells
-    let updatedClassList = [];
+    let updatedCellsAreAlive = [];
     for (let x = 0; x < grid.length; x++) {
-        updatedClassList[x] = [];
+        updatedCellsAreAlive[x] = [];
 
         for (let y = 0; y < grid[x].length; y++) {
-            let oldClassList = grid[x][y].classList;
+            // checks the classes to find the state
+            let oldCellIsAlive = grid[x][y].classList.contains("alive") && !grid[x][y].classList.contains("dead");
             let cellsAround = [];
 
-            // creates a dummy element
-            let dummyElement = document.createElement("div");
-            // saves the state of the cell
-            let newClassList = dummyElement.classList;
-
-            // adds the cell class to retain the value
-            newClassList.add("cell");
-
-            if (oldClassList.contains("dead")) {
-                newClassList.add("dead");
-            }
-
-            if (oldClassList.contains("alive")) {
-                newClassList.add("alive");
-            }
-
-            updatedClassList[x][y] = newClassList;
+            updatedCellsAreAlive[x][y] = null;
 
             // copy all of neighbour cells
             for (let i = -1; i <= 1; i++) {
-                if (grid[x + i] == undefined) {
+                if (grid[x + i] === undefined) {
                     continue;
                 }
 
                 for (let j = -1; j <= 1; j++) {
-                    if (i == 0 && j == 0) {
+                    if (i === 0 && j === 0) {
                         continue;
                     }
                     cellsAround.push(grid[x + i][y + j]);
@@ -44,11 +29,10 @@ const drawNextStep = function () {
             }
 
             // saves the state of the newCell variable (dead or alive)
-            let isAlive = oldClassList.contains("alive");
             let numberOfAlive = 0;
 
             for (let toCheckIndex in cellsAround) {
-                if (cellsAround[toCheckIndex] == undefined) {
+                if (cellsAround[toCheckIndex] === undefined) {
                     continue;
                 }
 
@@ -57,22 +41,20 @@ const drawNextStep = function () {
                     numberOfAlive++;
 
                     // if there are more cells than required, the newCell is dead
-                    if (!isAlive && numberOfAlive > 3) {
+                    if (numberOfAlive > 3) {
                         break;
                     }
                 }
             }
 
             // set the right class
-            if (isAlive) {
+            if (oldCellIsAlive) {
                 if (numberOfAlive < 2 || numberOfAlive > 3) {
-                    newClassList.remove("alive");
-                    newClassList.add("dead");
+                    updatedCellsAreAlive[x][y] = false;
                 }
             } else {
-                if (numberOfAlive == 3) {
-                    newClassList.remove("dead");
-                    newClassList.add("alive");
+                if (numberOfAlive === 3) {
+                    updatedCellsAreAlive[x][y] = true;
                 }
             }
         }
@@ -81,7 +63,22 @@ const drawNextStep = function () {
 
     for (let x in grid) {
         for (let y in grid[x]) {
-            grid[x][y].classList = updatedClassList[x][y];
+            let updateCellIsAlive = updatedCellsAreAlive[x][y];
+
+            // the state does not change, continue to next step
+            if (updateCellIsAlive === null) {
+                continue;
+            }
+
+            let classList = grid[x][y].classList;
+
+            if (updateCellIsAlive === true) {
+                classList.remove("dead");
+                classList.add("alive");
+            } else  {
+                classList.remove("alive");
+                classList.add("dead");
+            }
         }
     }
     stepsCounter.value++;
