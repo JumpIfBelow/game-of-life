@@ -12,3 +12,13 @@ autoStep.addEventListener("click", function(_event){
         window.clearInterval(intervalHolder);
     }
 });
+
+// changes the interval if the value changes and the checkbox is checked
+autoStepInterval.addEventListener("input", function(_event){
+    let interval = parseInt(this.value);
+
+    if (autoStep.checked) {
+        window.clearInterval(intervalHolder);
+        intervalHolder = window.setInterval(drawNextStep, interval);
+    }
+});
