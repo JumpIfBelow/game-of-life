@@ -1,4 +1,7 @@
-function nextStep() {
+/**
+ * Function that draw the next step.
+ */
+const drawNextStep = function () {
     // go through all cells
     let updatedClassList = [];
     for (let x = 0; x < grid.length; x++) {
@@ -83,10 +86,8 @@ function nextStep() {
             grid[x][y].classList = updatedClassList[x][y];
         }
     }
-}
+    stepsCounter.value++;
+};
 
-let nextStepButton = document.querySelector("[name=nextStep]");
-
-nextStepButton.addEventListener("click", function(_event) {
-    nextStep();
-});
+// fires the function when clicking the button
+nextStep.addEventListener("click", drawNextStep);

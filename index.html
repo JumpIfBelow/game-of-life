@@ -2,33 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The game of the life the return definitive anniversary limited edition III</title>
+    <title>
+        The game of life
+    </title>
 
     <link rel="stylesheet" href="public/css/style.css">
 </head>
+
 <body>
-    <div>
-        <form action="">
-            <input type="number" min="1" name="xSize" placeholder="Nombre de cases X">
-            <input type="number" min="1" name="ySize" placeholder="Nombre de cases Y">
-        </form>
+    <div id="game-board">
     </div>
-    <div id="gameBoard">
 
-    </div>
-    <button name="nextStep">
-        Étape suivante
-    </button>
-    <input type="checkbox" name="auto">
-    <p>
-        Vitesse du mode auto :
-    </p>
-    <input type="number" name="interval"> ms
-    <button>
-        Générer aléatoirement
-    </button>
+    <fieldset>
+        <legend>
+            Contrôles
+        </legend>
 
+        <div>
+            <button id="next-step">
+                Étape suivante
+            </button>
+            <span>
+                Nombre d'étapes :
+            </span>
+            <input id="steps-counter" type="number" value="0" required disabled>
+        </div>
+
+        <div>
+            <span>
+                Taille :
+            </span>
+            <input id="x-size" type="number" min="1" max="100" placeholder="Nombre de cases X" value="10" required>
+            x
+            <input id="y-size" type="number" min="1" max="100" placeholder="Nombre de cases Y" value="10" required>
+        </div>
+
+        <div>
+            <span>
+                Mode automatique :
+            </span>
+            <input id="auto-step" type="checkbox">
+            <span>
+                Temps entre chaque étape :
+            </span>
+            <input id="auto-step-interval" type="number" min="1" value="1000" required> ms
+        </div>
+
+        <div>
+            <button id="random-generation">
+                Générer aléatoirement
+            </button>
+            <span>
+                Probabilité de vie :
+            </span>
+            <input id="alive-probability" type="number" min="0" max="100" value="20" required>
+            <span>
+                %
+            </span>
+        </div>
+    </fieldset>
+
+    <script src="public/js/init.js"></script>
     <script src="public/js/gameBoard.js"></script>
     <script src="public/js/nextStep.js"></script>
+    <script src="public/js/randomGeneration.js"></script>
+    <script src="public/js/changeSize.js"></script>
+    <script src="public/js/autoStep.js"></script>
 </body>
 </html>
