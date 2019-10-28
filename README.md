@@ -15,3 +15,4 @@ Simply open the index.html file in your browser. You're done here!
 
 ## TODO
 - [ ] Inaccurate naming on X and Y. Actually, X is for a row instead of a column, and vice-versa for Y.
+- [ ] Make it with functional-programming with dedicated API linking DOM to state (e.g.: object containing neighbors with top, topRight, ...)
